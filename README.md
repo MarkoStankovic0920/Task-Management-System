@@ -1,83 +1,86 @@
-Task Management System
+# **Task Management System**
 
 This Task Management System is designed to facilitate efficient task allocation, management, and monitoring within organizations. With distinct roles and permissions, it offers a comprehensive solution for managing tasks, allocating resources, and monitoring team performance.
-Roles:
-Admin:
 
-    Can create, delete, and assign tasks to users.
-    Manages user accounts and roles.
-    Accesses all tasks and user information.
+## **Roles:**
 
-User:
+### **Admin:**
 
-    Views tasks assigned to them.
-    Updates task statuses and adds comments.
-    Limited access to other users' tasks and information.
+- Can create, delete, and assign tasks to users.
+- Manages user accounts and roles.
+- Accesses all tasks and user information.
 
-Supervisor:
+### **User:**
 
-    Views tasks assigned to specific teams or departments.
-    Generates reports on person perfomance.
-    Limited access to tasks and user information outside their designated teams.
+- Views tasks assigned to them.
+- Updates task statuses and adds comments.
+- Limited access to other users' tasks and information.
 
-Functionality:
-Admin Panel:
+### **Supervisor:**
 
-    Access to a dashboard for task management.
-    Assigns tasks to individual users or specific teams.
-    Manages user accounts, including creating new users and assigning roles.
+- Views tasks assigned to specific teams or departments.
+- Generates reports on team performance and task completion rates.
+- Limited access to tasks and user information outside their designated teams.
 
-User Interface:
+## **Functionality:**
 
-    Users log in to view assigned tasks.
-    Updates task status, marks tasks as complete.
+### **Admin Panel:**
 
-Supervisor Panel:
+- Access to a dashboard for task management.
+- Assigns tasks to individual users or specific teams.
+- Manages user accounts, including creating new users and assigning roles.
 
-    Specialized dashboard to view tasks assigned to specific teams or departments.
-    Generates reports on task completion rates.
+### **User Interface:**
 
-Permissions:
-Admin Permissions:
+- Users log in to view assigned tasks.
+- Updates task status, marks tasks as complete, adds comments, or requests more information.
+- Filters tasks based on priority, due date, or status.
 
-    Full control over task management and user accounts.
-    Access to all tasks and user information.
+### **Supervisor Panel:**
 
-User Permissions:
+- Specialized dashboard to view tasks assigned to specific teams or departments.
+- Generates reports on task completion rates, average task duration, and team performance.
+- Monitors workload distribution and identifies potential bottlenecks.
 
-    Limited to tasks assigned to them.
-    Update task statuses.
-    Restricted access to other users' tasks and information.
+## **Permissions:**
 
-Supervisor Permissions:
+### **Admin Permissions:**
 
-    Access to tasks assigned to specific people.
-    Generates reports on person perfomance.
-    Limited access to tasks and user information outside their designated teams.
+- Full control over task management and user accounts.
+- Access to all tasks and user information.
 
-Security:
+### **User Permissions:**
 
-    Role-based authentication ensures users access only relevant features and information.
-    Data encryption and secure authentication mechanisms protect sensitive information.
-    Regular security audits and updates address any vulnerabilities.
+- Limited to tasks assigned to them.
+- Update task statuses and add comments.
+- Restricted access to other users' tasks and information.
 
-Creating an Admin from the Shell in .NET Identity:
+### **Supervisor Permissions:**
+
+- Access to tasks assigned to specific teams or departments.
+- Generates reports on team performance.
+- Limited access to tasks and user information outside their designated teams.
+
+## **Security:**
+
+- Role-based authentication ensures users access only relevant features and information.
+- Data encryption and secure authentication mechanisms protect sensitive information.
+- Regular security audits and updates address any vulnerabilities.
+
+## **Creating an Admin from the Shell in .NET Identity:**
 
 To create an admin using .NET Identity from the shell, follow these steps:
 
-    Open a command-line interface or terminal.
+1. Open a command-line interface or terminal.
+2. Navigate to the directory where your .NET project is located.
+3. Run the following command to open the .NET CLI:
 
-    Navigate to the directory where your .NET project is located.
+   ```bash
+   dotnet tool install --global dotnet-aspnet-codegenerator
 
-    Run the following command to open the .NET CLI:
+    Once installed, run the following command to scaffold Identity pages into your project:
 
     bash
-
-dotnet tool install --global dotnet-aspnet-codegenerator
-
-Once installed, run the following command to scaffold Identity pages into your project:
-
-bash
 
 dotnet aspnet-codegenerator identity --useDefaultUI
 
@@ -97,3 +100,9 @@ bash
     Once the migration and database update are complete, the admin user will be created and can log in to the Task Management System with admin privileges.
 
 This Task Management System offers a robust solution for organizations to streamline task management processes, allocate resources effectively, and monitor team performance efficiently. With role-based permissions and enhanced security measures, it ensures data integrity and confidentiality throughout the system.
+
+csharp
+
+
+This markdown will render with bold and larger titles when viewed on GitHub.
+
