@@ -1,0 +1,51 @@
+﻿@model User
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = "User-Delete";
+}
+@if (SignInManager.IsSignedIn(User))
+{
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="container-sm  p-4 bg-dark shadow-lg rounded w-100 text-white">
+            <form method="post"  asp-controller="Admin" asp-action="Delete">
+                <div>
+                    <div class="row pb-2">
+                        <h2 class="text-light">Delete User</h2>
+                    </div>
+                    <div asp-validation-summary="All" class="text-danger mt-0 mb-1 ms-3"></div>
+                    <div class="mb-5 text-white d-flex flex-column gap-4">
+                        <div>
+                            <label asp-for="Email" class="mb-1"></label>
+                            <input asp-for="Email" class="form-control  text-black border-0" readonly />
+                        </div>
+                        <div>
+                            <label asp-for="Role" class="mb-1"></label>
+                            @if (Model.Role != null)
+                            {
+                                <input asp-for="@Model.Role" value="@Model.Role" class="form-control  text-black border-0" readonly />
+                            }
+                            else
+                            {
+                                <input asp-for="Role" value="None" class="form-control  text-black border-0" readonly />
+                            }
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end gap-3">
+                        <button type="submit" class="btn btn-primary" style="width:200px;">Remove</button>
+                        <a asp-controller="Admin" asp-action="UserList" class="btn btn-light" style="width:200px;">Back to List</a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    }
+}
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

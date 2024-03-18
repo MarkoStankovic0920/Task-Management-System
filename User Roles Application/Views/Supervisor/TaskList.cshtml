@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Tasks>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = "List";
+}
+@if (SignInManager.IsSignedIn(User))
+{
+    @if (User.IsInRole("Admin") || User.IsInRole("Supervisor"))
+    {
+        
+        <div class="container text-center p-4 bg-dark  shadow-lg rounded w-100 ">
+            <partial name="SupervisorPanel" />
+        <table class="table table-dark table-bordered">
+            <thead class="table-secondary text-center">
+                <h1 class="fw-bold">Task List</h1>
+                <tr class="col col-md-4">
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Due Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Assigned To</th>
+                    <th scope="col">Creator</th>
+                    <th scope="col">Progress Report</th>
+                </tr>
+            </thead>
+            @foreach (var obj in Model)
+            
+                {  if (obj.Supervisor == User.Identity.Name || User.IsInRole("Admin"))
+                    {
+                        <tbody>
+                            <tr class="col text-center align-middle">
+                                <tc>
+                                    <td> @obj.Name</td>
+                                </tc>
+                                <tc>
+                                    <td> @obj.Description</td>
+                                </tc>
+                                <tc>
+                                    <td> @obj.DueDate</td>
+                                </tc>
+                                <tc>
+                                    <td>
+                                        @obj.Status
+                                    </td>
+                                </tc>
+                                <tc>
+                                    <td> @obj.AssignedTo</td>
+                                </tc>
+                                <tc>
+                                    <td> @obj.Creator</td>
+                                </tc>
+                                <tc>
+                                    <td><a asp-controller="Supervisor" asp-action="Create" asp-route-id="@obj.Id" class="text-white btn btn-warning "><i class="bi bi-flag-fill"></i>Create a Report</a> </td>
+                                </tc>
+                            </tr>
+                        </tbody>
+                    }
+            }
+        </table>
+    </div>
+    }
+}

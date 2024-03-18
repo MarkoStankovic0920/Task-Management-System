@@ -1,0 +1,37 @@
+﻿@model TaskReport
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = "Create Task Report";
+}
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="container text-center p-4 bg-dark shadow-lg rounded w-100">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger mt-0 mb-1 ms-3"></div>
+            <div class="mt-5">
+                <div class="row pb-2 text-start">
+                    <h2>Create Task Report</h2>
+                </div>
+                <input asp-for="Id" value="null" type="hidden" />
+                <div class="mb-5 text-light d-flex flex-column gap-4">
+                    <div>
+                        <label asp-for="TaskId" class="mb-1 fs-5">Task Id</label>
+                        <input asp-for="TaskId" value="@Model.Task.Id" type="number" class="form-control text-black border-0" readonly />
+                    </div>
+                    <div>
+                        <label asp-for="Description" class="mb-1 fs-5"></label>
+                        <input asp-for="Description" type="text" class="form-control text-black border-0" placeholder="Write your description here." />
+                    </div>
+                </div>
+                <div asp-validation-summary="All" class="text-danger text-start fs-6"></div>
+                <div class="d-flex justify-content-end gap-3">
+                    <button type="submit" class="btn btn-primary" style="width:200px;" onmouseover="this.style.color='#2ecc71'" onmouseout="this.style.color='#f7f9f9'">Create</button>
+                    <a asp-controller="Supervisor" asp-action="SupervisorPanel" class="btn btn-light" style="width:200px;">Back to Tasks</a>
+                </div>
+            </div>
+        </form>
+    </div>
+}

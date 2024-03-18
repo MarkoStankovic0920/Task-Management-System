@@ -1,0 +1,52 @@
+﻿@model User
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = "User-Create";
+}
+@if (SignInManager.IsSignedIn(User))
+{
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="container text-center p-4 bg-dark  shadow-lg rounded w-100 ">
+
+
+            <form method="post" asp-action="CreateUser">
+                <partial name="AdminPanel" />
+                <div class="mt-5">
+                    <div class="row pb-2 text-start">
+                        <h2>Create User</h2>
+                    </div>
+                    <div class="mb-5 text-light d-flex flex-column gap-4">
+                        <div>
+                            <label asp-for="Email" class="mb-1 fs-5 "></label>
+                            <input asp-for="Email" placeholder="Write your email here." type="text" class="form-control highlight-color text-black border-0" id="NameValidate" />
+                        </div>
+                        <div>
+                            <label asp-for="Password"  class="mb-1 fs-5 "></label>
+                            <input asp-for="Password" placeholder="Enter your password." type="password" class="form-control text-black border-0" />
+                        </div>
+                        <div>
+                            <label asp-for="ConfirmPassword"  class="mb-1 fs-5 "></label>
+                            <input asp-for="ConfirmPassword" placeholder="Repeat your password." type="password" class="form-control text-black border-0" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Role"></label>
+                            <select asp-for="Role" class="form-control">
+                                <option value="Admin">Admin</option>
+                                <option value="Supervisor">Supervisor</option>
+                                <option value="Member">Member</option>
+                            </select>
+                            <span asp-validation-for="Role" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div asp-validation-summary="All" class="text-danger text-start fs-6"></div>
+                    <div class="d-flex justify-content-end gap-3">
+                        <button type="submit" class="btn btn-primary " style="width:200px;" onmouseover="this.style.color='#2ecc71'" onmouseout="this.style.color='#f7f9f9'">Create</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    }
+}

@@ -1,0 +1,24 @@
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = "User-Admin Panel";
+}
+@if (SignInManager.IsSignedIn(User))
+{
+    @if (User.IsInRole("Admin"))
+    {
+    <div class="container text-center shadow-lg p-3 mb-5 bg-light bg-opacity-75 rounded text-black">
+        <div class="row fs-5 ">
+
+            <div class="col border-end border-black">
+                <a class="nav-link" asp-controller="Admin" asp-action="UserList">User List</a>
+            </div>
+            <div class="col">
+                <a class="nav-link"  asp-controller="Admin" asp-action="TaskList">Task List</a>
+            </div>
+        </div>
+    </div>
+    }
+}

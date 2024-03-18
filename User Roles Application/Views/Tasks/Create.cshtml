@@ -1,0 +1,74 @@
+﻿@model Tasks
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = "Create";
+}
+@if (SignInManager.IsSignedIn(User))
+{
+    @if (User.IsInRole("Admin") || User.IsInRole("Member"))
+    {
+    <div class="container text-center p-4 bg-dark  shadow-lg rounded w-100 ">
+        <form method="post">
+        <partial name="../Admin/AdminPanel.cshtml" />
+            <div class="mt-5">
+                <div class="row pb-2 text-start">
+                    <h2>Create Task</h2>
+                </div>
+                <div class="mb-5 text-light d-flex flex-column gap-4">
+                    <div>
+                        <label asp-for="Name" class="mb-1 fs-5"></label> 
+                        <input asp-for="Name" placeholder="Write your name here." type="text" class="form-control highlight-color text-black border-0" id="NameValidate" />
+                    </div>
+                    <div>
+                        <label asp-for="Description" class="mb-1 fs-5 "></label>
+                        <input asp-for="Description" type="text" placeholder="Write your description here." class="form-control text-black border-0" />
+                    </div>
+                    <div>
+                        <label asp-for="DueDate" class="mb-1 fs-5"></label>
+                        <input asp-for="DueDate" type="datetime-local" class="form-control  text-black border-0" />
+                    </div>
+                    <div>
+                    <label asp-for="AssignedTo">Assigned To</label>
+                    <select asp-for="AssignedTo" class="form-control text-black">
+                        <option value="None">None</option>
+                        @{
+                            var userMembers = UserManager.GetUsersInRoleAsync("Member");
+                            foreach (var obj in userMembers.Result.ToList())
+                            {
+                                        <option value="@obj.Email">@obj.Email</option>    
+                            }
+                        }
+                    </select>
+                    </div>
+                        <div>
+                            <label asp-for="Supervisor">Supervisor</label>
+                            <select asp-for="Supervisor" class="form-control text-black">
+                                <option value="None">None</option>
+                                @{
+                                    var userSupervisors = UserManager.GetUsersInRoleAsync("Supervisor");
+                                    foreach (var obj in userSupervisors.Result.ToList())
+                                    {
+                                        <option value="@obj.Email">@obj.Email</option>
+                                    }
+                                }
+                             </select>
+
+                        </div>
+                    <div>
+                        <label asp-for="Creator" class="mb-1 fs-5">Creator: </label>
+                        <input asp-for="Creator" value="@User.Identity.Name" class="text-white bg-dark shadow-lg rounded border-0"/>
+                    </div>
+                    
+                </div>
+                <div asp-validation-summary="All" class="text-danger text-start fs-6"></div>
+                <div class="d-flex justify-content-end gap-3">
+                    <button type="submit" class="btn btn-primary " style="width:200px;" onmouseover="this.style.color='#2ecc71'" onmouseout="this.style.color='#f7f9f9'">Create</button>
+                </div>
+            </div>
+        </form>
+        </div>
+        }
+}
